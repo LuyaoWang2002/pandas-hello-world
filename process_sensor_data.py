@@ -3,7 +3,7 @@ import pandas as pd
 # =====================================
 # 1. LOAD DATA
 # =====================================
-df = pd.read_csv('sensor_data.csv')
+df = pd.read_excel('sensor_data.xlsx')
 print("Data Loaded!\n")
 
 
@@ -14,7 +14,7 @@ print("First few rows:")
 print(df.head())
 
 print("\n\nBasic Info:")
-print(df.info())
+df.info()
 
 print("\n\nStatistics:")
 print(df.describe())
@@ -27,7 +27,7 @@ print("\n\nMissing values:")
 print(df.isnull().sum())
 
 # Fill missing temperature with average
-df['Temperature'].fillna(df['Temperature'].mean(), inplace=True)
+df['Temperature'] = df['Temperature'].fillna(df['Temperature'].mean())
 print("\nMissing values fixed")
 
 
@@ -61,5 +61,5 @@ print(df[df['Needs_Check']][['Equipment', 'Temperature', 'Status']])
 # =====================================
 # 6. EXPORT RESULTS
 # =====================================
-df.to_csv('sensor_data_analyzed.csv', index=False)
-print("\nResults saved to sensor_data_analyzed.csv")
+df.to_excel('sensor_data_analyzed.xlsx', sheet_name='Analysis', index=False)
+print("\nResults saved to sensor_data_analyzed.xlsx")
